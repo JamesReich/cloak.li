@@ -26,10 +26,13 @@ function App() {
 
         if (inputUrl.startsWith(baseUrl)) {
             setIsBaseUrl(true);
+            setTimeout(() => {
+                setIsBaseUrl(false);
+            }, 2000);
             return;
         }
 
-        setIsBaseUrl(false);
+
 
         try {
             const response = await fetch('/api/short', {
@@ -62,6 +65,9 @@ function App() {
 
             } else {
                 setShortenFailed(true);
+                setTimeout(() => {
+                    setShortenFailed(false);
+                }, 2000);
             }
 
         } catch (error) {
@@ -152,12 +158,6 @@ function App() {
 
     return (
         <div className="App">
-            {isBaseUrl && (
-                <div className="bg-red-400/40 text-red-300 border border-red-300 rounded w-fit mx-auto mt-2">
-                    <p>You cannot shorten the base URL. Please enter a different URL.</p>
-                </div>
-            )}
-
             <div className="flex justify-center items-center mb-10">
                 <img src={logo} alt="logo" className="w-[500px]" />
                 <h1 className="text-7xl font-bold self-end mb-2">.li</h1>
@@ -195,6 +195,11 @@ function App() {
                 {shortenFailed && (
                     <div className="bg-red-400/40 text-red-300 border border-red-300 rounded w-fit mx-auto mt-2">
                         <p>Could not get short link. Please try again.</p>
+                    </div>
+                )}
+                {isBaseUrl && (
+                    <div className="bg-red-400/40 text-red-300 border border-red-300 rounded w-fit mx-auto mt-2">
+                        <p>You cannot shorten the base URL. Please enter a different URL.</p>
                     </div>
                 )}
             </form>
