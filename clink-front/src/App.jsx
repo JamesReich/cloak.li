@@ -12,7 +12,7 @@ function App() {
     const [isBaseUrl, setIsBaseUrl] = useState(false);
     const [showHistory, setShowHistory] = useState(false);
 
-    const baseUrl = 'https://www.api.cloak.li';
+    const baseUrl = 'https://api.cloak.li';
 
     useEffect(() => {
         const savedHistory = JSON.parse(localStorage.getItem('shortenHistory') || '[]');
