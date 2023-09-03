@@ -38,6 +38,7 @@ function App() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                credentials: 'include',
                 body: JSON.stringify({
                     origUrl: inputUrl,
                 }),
@@ -81,12 +82,14 @@ function App() {
             return;
         }
         try {
-            const response = await fetch(`${baseUrl}/api/clicks/${urlId}`);
+            const response = await fetch(`${baseUrl}/api/clicks/${urlId}`, {
+                credentials: 'include',
+            });
             if (response.ok) {
                 const data = await response.json();
                 const newHistory = [...history];
                 newHistory[index] = { ...newHistory[index], clicks: data.clicks };
-                setHistory(newHistory); // set the new history
+                setHistory(newHistory);
                 localStorage.setItem('shortenHistory', JSON.stringify(newHistory));
             } else {
                 console.log('Failed to fetch clicks');
@@ -105,7 +108,7 @@ function App() {
             });
         }, 30000);
 
-        return () => clearInterval(intervalId); // Clear interval on component unmount
+        return () => clearInterval(intervalId);
     }, [history]);
 
 
