@@ -211,7 +211,7 @@ function App() {
                         {history.slice().reverse().map((item, index) => (
                             <div key={index} className="flex flex-row justify-between items-center border border-gray-300 rounded p-2 mt-2 w-full">
                                 <div className="flex flex-col justify-start text-start w-full">
-                                    <div className="text-start w-1/2">
+                                    <div className="text-start w-[600px]">
                                         <p className="my-2 text-violet-400 truncate">{item.origUrl}</p>
                                     </div>
                                     <div className="flex">
