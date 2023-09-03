@@ -16,8 +16,8 @@ app.use(express.json());
 
 // CORS
 const corsOptions = {
-    origin: ['https://cloak.li', 'http://localhost:5173'],
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    origin: ['https://cloak.li', 'https://www.cloak.li', 'http://localhost:5173'],
+    methods: 'GET,POST',
     credentials: true,
     optionsSuccessStatus: 204,
 };
