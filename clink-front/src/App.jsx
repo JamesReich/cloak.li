@@ -207,7 +207,7 @@ function App() {
                         {toggleHistoryIcon()}
                     </div>
                     <div className={`flex flex-col transition-all duration-500 ease-in-out ${showHistory ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
-                        {history.map((item, index) => (
+                        {history.slice().reverse().map((item, index) => (
                             <div key={index} className="flex flex-row justify-between items-center border border-gray-300 rounded p-2 mt-2 w-full">
                                 <div className="flex flex-col justify-start text-start w-full">
                                     <div className="text-start w-1/2">
