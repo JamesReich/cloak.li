@@ -11,6 +11,7 @@ function App() {
     const [history, setHistory] = useState([]);
     const [isBaseUrl, setIsBaseUrl] = useState(false);
     const [showHistory, setShowHistory] = useState(false);
+    const [copiedIndex, setCopiedIndex] = useState(null);
 
     const baseUrl = 'https://api.cloak.li';
 
@@ -130,16 +131,10 @@ function App() {
     const copyHistoryItemToClipboard = (shortUrl, index) => {
         navigator.clipboard.writeText(shortUrl).then(
             () => {
-                const newHistory = [...history];
-                const newItem = { ...newHistory[index], copied: true };
-                newHistory[index] = newItem;
-                setHistory(newHistory);
+                setCopiedIndex(index);
 
                 setTimeout(() => {
-                    const newerHistory = [...history];
-                    const newerItem = { ...newerHistory[index], copied: false };
-                    newerHistory[index] = newerItem;
-                    setHistory(newerHistory);
+                    setCopiedIndex(null);
                 }, 1500);
             },
             (err) => {
@@ -228,7 +223,7 @@ function App() {
                                             className="self-center ml-2 text-blue-100 hover:text-blue-400 cursor-pointer"
                                             size={16}
                                         />
-                                        {item.copied && <span className="bg-green-600 text-green-100 border border-green-300 rounded w-fit h-fit ml-2 self-center text-sm">Copied!</span>}
+                                        {copiedIndex === index && <span className="bg-green-600 text-green-100 border border-green-300 rounded w-fit h-fit ml-2 self-center text-sm">Copied!</span>}
                                     </div>
                                 </div>
                                 <div className="flex flex-col">
