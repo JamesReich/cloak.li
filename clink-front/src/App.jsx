@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react'
 import './App.css'
 import logo from './assets/full-logo-white.svg'
-import {ChevronRight, ChevronDown} from "lucide-react";
+import {ChevronRight, ChevronDown, Copy} from "lucide-react";
 
 function App() {
     const [inputUrl, setInputUrl] = useState('');
@@ -18,7 +18,7 @@ function App() {
         setHistory(savedHistory);
     }, []);
 
-    console.log("History: ", history)
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -72,7 +72,6 @@ function App() {
 
 
     const updateClicks = async (urlId, index) => {
-        console.log("Updating clicks for urlId: ", urlId);  // Debugging line
         if(!urlId) {
             console.log("urlId is undefined");
             return;
@@ -120,6 +119,28 @@ function App() {
             }
         );
     };
+
+    const copyHistoryItemToClipboard = (shortUrl, index) => {
+        navigator.clipboard.writeText(shortUrl).then(
+            () => {
+                const newHistory = [...history];
+                const newItem = { ...newHistory[index], copied: true };
+                newHistory[index] = newItem;
+                setHistory(newHistory);
+
+                setTimeout(() => {
+                    const newerHistory = [...history];
+                    const newerItem = { ...newerHistory[index], copied: false };
+                    newerHistory[index] = newerItem;
+                    setHistory(newerHistory);
+                }, 1500);
+            },
+            (err) => {
+                console.error("Could not copy text: ", err);
+            }
+        );
+    };
+
 
     const toggleHistory = () => {
         setShowHistory(!showHistory);
@@ -192,13 +213,18 @@ function App() {
                                     <div className="text-start w-1/2">
                                         <p className="my-2 text-blue-400 truncate">{item.origUrl}</p>
                                     </div>
-                                    <div>
-                                        <a href={item.shortUrl} target="_blank" className="my-2 text-blue-300 hover:text-blue-100 transition-all duration-300 ease-in-out">
-                                            <span className="text-blue-100 font-semibold mr-2">Short -></span>{item.shortUrl}
+                                    <div className="flex">
+                                        <a href={item.shortUrl} target="_blank" className="my-2 flex text-blue-300 hover:text-blue-100 transition-all duration-300 ease-in-out">
+                                            <span className="text-blue-100 font-semibold mr-2">Short:</span>{item.shortUrl}
                                         </a>
+                                        <Copy
+                                            onClick={() => copyHistoryItemToClipboard(item.shortUrl, index)}
+                                            className="self-center ml-2 text-blue-100 hover:text-blue-400 cursor-pointer"
+                                            size={16}
+                                        />
+                                        {item.copied && <span className="bg-green-600 text-green-100 border border-green-300 rounded w-fit h-fit ml-2 self-center text-sm">Copied!</span>}
                                     </div>
                                 </div>
-
                                 <div className="flex flex-col">
                                     <p className="text-gray-400">Clicks: {item.clicks}</p>
                                 </div>
@@ -212,4 +238,3 @@ function App() {
 }
 
 export default App;
-
