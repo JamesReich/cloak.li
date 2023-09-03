@@ -22,7 +22,7 @@ function App() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const baseUrl = "http://localhost:3333";
+        const baseUrl = process.env.BASE || 'http://localhost:3333';
 
         if (inputUrl.startsWith(baseUrl)) {
             setIsBaseUrl(true);
