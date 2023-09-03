@@ -22,7 +22,7 @@ function App() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const baseUrl = process.env.BASE || 'http://localhost:3333';
+        const baseUrl = 'https://www.api.cloak.li';
 
         if (inputUrl.startsWith(baseUrl)) {
             setIsBaseUrl(true);
