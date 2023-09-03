@@ -149,7 +149,7 @@ function App() {
     }
 
     const toggleHistoryIcon = () => {
-        return showHistory ? <ChevronDown onClick={toggleHistory} className="self-center ml-2 text-blue-100 hover:text-blue-400 cursor-pointer" size={18} /> : <ChevronRight onClick={toggleHistory} className="self-center ml-2 text-blue-100 hover:text-blue-400 cursor-pointer" size={18} />;
+        return showHistory ? <ChevronDown onClick={toggleHistory} className="self-center ml-2 text-violet-100 hover:text-violet-400 cursor-pointer" size={18} /> : <ChevronRight onClick={toggleHistory} className="self-center ml-2 text-violet-100 hover:text-violet-400 cursor-pointer" size={18} />;
     }
 
     return (
@@ -164,19 +164,19 @@ function App() {
                 onSubmit={handleSubmit}>
                 <div>
                     <input
-                        className="border-t border-b border-l border-blue-300 rounded-tl rounded-bl p-2 outline-none focus:border-amber-400"
+                        className="border-t border-b border-l border-violet-300 rounded-tl rounded-bl p-2 outline-none focus:border-amber-400"
                         type="text"
                         value={inputUrl}
                         onChange={(e) => setInputUrl(e.target.value)}
                     />
                     <button
-                        className="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 border-blue-300 border-r border-t border-b rounded-tr rounded-br"
+                        className="bg-violet-400 hover:bg-violet-500 text-white font-bold py-2 px-4 border-violet-300 border-r border-t border-b rounded-tr rounded-br"
                         type="submit">Shorten</button>
                 </div>
                 {shortUrl && (
                     <div className="mt-2">
                         <div
-                            className="relative bg-blue-400/40 hover:bg-blue-400 hover:text-white cursor-pointer p-3 text-blue-300 border border-blue-300 rounded w-fit mx-auto mt-2"
+                            className="relative bg-violet-400/40 hover:bg-violet-400 hover:text-white cursor-pointer p-3 text-violet-300 border border-violet-300 rounded w-fit mx-auto mt-2"
                             onClick={copyToClipboard}>
                             {shortUrl}
                             {textCopied && (
@@ -212,15 +212,15 @@ function App() {
                             <div key={index} className="flex flex-row justify-between items-center border border-gray-300 rounded p-2 mt-2 w-full">
                                 <div className="flex flex-col justify-start text-start w-full">
                                     <div className="text-start w-1/2">
-                                        <p className="my-2 text-blue-400 truncate">{item.origUrl}</p>
+                                        <p className="my-2 text-violet-400 truncate">{item.origUrl}</p>
                                     </div>
                                     <div className="flex">
-                                        <a href={item.shortUrl} target="_blank" className="my-2 flex text-blue-300 hover:text-blue-100 transition-all duration-300 ease-in-out">
-                                            <span className="text-blue-100 font-semibold mr-2">Short:</span>{item.shortUrl}
+                                        <a href={item.shortUrl} target="_blank" className="my-2 flex text-violet-300 hover:text-violet-100 transition-all duration-300 ease-in-out">
+                                            <span className="text-violet-100 font-semibold mr-2">Short:</span>{item.shortUrl}
                                         </a>
                                         <Copy
                                             onClick={() => copyHistoryItemToClipboard(item.shortUrl, index)}
-                                            className="self-center ml-2 text-blue-100 hover:text-blue-400 cursor-pointer"
+                                            className="self-center ml-2 text-violet-100 hover:text-violet-400 cursor-pointer"
                                             size={16}
                                         />
                                         {copiedIndex === index && <span className="bg-green-600 text-green-100 border border-green-300 rounded w-fit h-fit ml-2 self-center text-sm">Copied!</span>}
