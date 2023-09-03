@@ -15,7 +15,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // CORS
-app.use(cors());
+const corsOptions = {
+    origin: 'https://cloak.li',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    optionsSuccessStatus: 204,
+};
+
+app.use(cors(corsOptions));
 
 app.use('/', indexRouter);
 app.use('/api', urlsRouter);

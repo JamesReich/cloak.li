@@ -12,6 +12,7 @@ function App() {
     const [isBaseUrl, setIsBaseUrl] = useState(false);
     const [showHistory, setShowHistory] = useState(false);
 
+    const baseUrl = 'https://www.api.cloak.li';
 
     useEffect(() => {
         const savedHistory = JSON.parse(localStorage.getItem('shortenHistory') || '[]');
@@ -22,8 +23,6 @@ function App() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const baseUrl = 'https://www.api.cloak.li';
-
         if (inputUrl.startsWith(baseUrl)) {
             setIsBaseUrl(true);
             setTimeout(() => {
@@ -33,9 +32,8 @@ function App() {
         }
 
 
-
         try {
-            const response = await fetch('/api/short', {
+            const response = await fetch(`${baseUrl}/api/short`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -83,7 +81,7 @@ function App() {
             return;
         }
         try {
-            const response = await fetch(`http://localhost:3333/api/clicks/${urlId}`);
+            const response = await fetch(`${baseUrl}/api/clicks/${urlId}`);
             if (response.ok) {
                 const data = await response.json();
                 const newHistory = [...history];
