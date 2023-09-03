@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/:shortlink",
+      "destination": "https://api.cloak.li/:shortlink"
+    }
+  ]
+}
